@@ -1,13 +1,9 @@
 import { GoogleGenAI } from "@google/genai";
 
-const apiKey = process.env.API_KEY || '';
-const ai = new GoogleGenAI({ apiKey });
+// Fixed: Use process.env.API_KEY strictly as per guidelines
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const getStyleAdvice = async (userQuery: string): Promise<string> => {
-  if (!apiKey) {
-    return "AI Service is currently unavailable. Please contact the salon directly.";
-  }
-
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
