@@ -10,8 +10,9 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     define: {
       // This allows the code to access `process.env.API_KEY` in the browser
-      // It pulls the value from Vercel's VITE_API_KEY or API_KEY variable
       'process.env.API_KEY': JSON.stringify(env.VITE_API_KEY || env.API_KEY),
+      // Polyfill process for other libraries that might check it
+      'process.env': {},
     },
   };
 });
